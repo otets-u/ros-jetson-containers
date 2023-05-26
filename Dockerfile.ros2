@@ -1,14 +1,15 @@
 #
-# this dockerfile roughly follows the 'Install ROS From Source' procedures from:
-#   https://docs.ros.org/en/humble/Installation/Alternatives/Ubuntu-Development-Setup.html
-#
-# it gets built by "scripts/docker_build_ros.sh --distro humble", which sets the docker args
+# To build this Dockerfile, run:  scripts/docker_build_ros.sh --distro humble
+# It sets the Docker arguments below (distro can be: foxy, galactic, humble, iron)
+# See scripts/docker_build_ros.sh --help for more options.
 #
 ARG BASE_IMAGE
 FROM ${BASE_IMAGE}
 
 ARG ROS_PKG=ros_base
-ENV ROS_DISTRO=humble
+ARG ROS_VERSION=humble
+
+ENV ROS_DISTRO=${ROS_VERSION}
 ENV ROS_ROOT=/opt/ros/${ROS_DISTRO}
 ENV ROS_PYTHON_VERSION=3
 
@@ -30,8 +31,8 @@ RUN update-alternatives --install /usr/bin/python python /usr/bin/python3 1
 ARG OPENCV_URL=https://nvidia.box.com/shared/static/5v89u6g5rb62fpz4lh0rz531ajo2t5ef.gz
 ARG OPENCV_DEB=OpenCV-4.5.0-aarch64.tar.gz
 
-COPY scripts/opencv_install.sh /tmp/opencv_install.sh
-RUN cd /tmp && ./opencv_install.sh ${OPENCV_URL} ${OPENCV_DEB}
+COPY scripts/opencv_install.sh opencv_install.sh
+RUN ./opencv_install.sh ${OPENCV_URL} ${OPENCV_DEB}
     
 # build ROS from source
 COPY scripts/ros2_build.sh ros2_build.sh

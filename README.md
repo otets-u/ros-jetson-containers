@@ -1,6 +1,8 @@
 # Machine Learning Containers for Jetson and JetPack
 
-Hosted on [NVIDIA GPU Cloud](https://ngc.nvidia.com/catalog/containers?orderBy=modifiedDESC&query=L4T&quickFilter=containers&filters=) (NGC) are the following Docker container images for machine learning on Jetson:
+![NVIDIA](https://img.shields.io/static/v1?style=for-the-badge&message=NVIDIA&color=222222&logo=NVIDIA&logoColor=76B900&label=) ![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white) ![PyTorch](https://img.shields.io/badge/PyTorch-%23EE4C2C.svg?style=for-the-badge&logo=PyTorch&logoColor=white) ![TensorFlow](https://img.shields.io/badge/TensorFlow-%23FF6F00.svg?style=for-the-badge&logo=TensorFlow&logoColor=white) ![Jupyter Notebook](https://img.shields.io/badge/jupyter-%26FA0F00.svg?style=for-the-badge&logo=jupyter&logoColor=white) ![ROS](https://img.shields.io/badge/ros-%230A0FF9.svg?style=for-the-badge&logo=ros&logoColor=white) 
+
+This project provides Dockerfiles, build scripts, and container images for machine learning on [NVIDIA Jetson](https://developer.nvidia.com/embedded-computing):
 
 * [`l4t-ml`](https://ngc.nvidia.com/catalog/containers/nvidia:l4t-ml)
 * [`l4t-pytorch`](https://ngc.nvidia.com/catalog/containers/nvidia:l4t-pytorch)
@@ -12,18 +14,18 @@ The following ROS containers are also available, which can be pulled from [Docke
 |----|:----:|:----:|:----:|
 | ROS Melodic   | [`ros-base`](https://hub.docker.com/repository/registry-1.docker.io/dustynv/ros/tags?name=melodic)           | X | X |
 | ROS Noetic    | [`ros-base`](https://hub.docker.com/repository/registry-1.docker.io/dustynv/ros/tags?name=noetic-ros-base)   | X | [`PyTorch`](https://hub.docker.com/repository/registry-1.docker.io/dustynv/ros/tags?name=noetic-pytorch) |
-| ROS2 Eloquent | [`ros-base`](https://hub.docker.com/repository/registry-1.docker.io/dustynv/ros/tags?name=eloquent)          | X | X |
 | ROS2 Foxy     | [`ros-base`](https://hub.docker.com/repository/registry-1.docker.io/dustynv/ros/tags?name=foxy-ros-base)     | [`desktop`](https://hub.docker.com/repository/registry-1.docker.io/dustynv/ros/tags?name=foxy-desktop) | [`PyTorch`](https://hub.docker.com/repository/registry-1.docker.io/dustynv/ros/tags?name=foxy-pytorch) |
 | ROS2 Galactic | [`ros-base`](https://hub.docker.com/repository/registry-1.docker.io/dustynv/ros/tags?name=galactic-ros-base) | [`desktop`](https://hub.docker.com/repository/registry-1.docker.io/dustynv/ros/tags?name=galactic-desktop) | [`PyTorch`](https://hub.docker.com/repository/registry-1.docker.io/dustynv/ros/tags?name=galactic-pytorch) |
 | ROS2 Humble   | [`ros-base`](https://hub.docker.com/repository/registry-1.docker.io/dustynv/ros/tags?name=humble-ros-base)   | [`desktop`](https://hub.docker.com/repository/registry-1.docker.io/dustynv/ros/tags?name=humble-desktop) | [`PyTorch`](https://hub.docker.com/repository/registry-1.docker.io/dustynv/ros/tags?name=humble-pytorch) |
+| ROS2 Iron     | [`ros-base`](https://hub.docker.com/repository/registry-1.docker.io/dustynv/ros/tags?name=iron-ros-base)   | [`desktop`](https://hub.docker.com/repository/registry-1.docker.io/dustynv/ros/tags?name=iron-desktop) | [`PyTorch`](https://hub.docker.com/repository/registry-1.docker.io/dustynv/ros/tags?name=iron-pytorch) |
 
-The ROS distros that use Python3 have PyTorch-based containers, and some have ROS Desktop for JetPack 5.x.
+The PyTorch-based ROS containers also have the [jetson-inference](https://github.com/dusty-nv/jetson-inference) and [ros_deep_learning](https://github.com/dusty-nv/ros_deep_learning) packages installed.
 
-## Pre-built Container Images
+## Pre-Built Container Images
 
 The following images can be pulled from NGC or DockerHub without needing to build the containers yourself:
 
-<details open>
+<details>
 <summary>
 <a href=https://ngc.nvidia.com/catalog/containers/nvidia:l4t-ml><b>l4t-ml</b></a> (<code>nvcr.io/nvidia/l4t-ml:r35.2.1-py3</code>)
 </summary>
@@ -144,20 +146,6 @@ The following images can be pulled from NGC or DockerHub without needing to buil
 
 <details>
 <summary>
-<a href=https://hub.docker.com/repository/registry-1.docker.io/dustynv/ros/tags?name=eloquent><b>ROS2 Eloquent</b></a> (<code>dustynv/ros:eloquent-ros-base-l4t-r32.7.1</code>)
-</summary>
-</br>
-
-|                                                                                     | L4T Version | Container Tag                                      |
-|-------------------------------------------------------------------------------------|:-----------:|----------------------------------------------------|
-| [`ROS2 Eloquent`](https://hub.docker.com/repository/registry-1.docker.io/dustynv/ros/tags?name=eloquent) <sup>(ros-base)</sup> |   R32.7.1   | `dustynv/ros:eloquent-ros-base-l4t-r32.7.1`        |
-|                                                                                     |   R32.6.1   | `dustynv/ros:eloquent-ros-base-l4t-r32.6.1`        |
-|                                                                                     |   R32.5.0*  | `dustynv/ros:eloquent-ros-base-l4t-r32.5.0`        |
-|                                                                                     |   R32.4.4   | `dustynv/ros:eloquent-ros-base-l4t-r32.4.4`        |
-
-</details>
-<details>
-<summary>
 <a href=https://hub.docker.com/repository/registry-1.docker.io/dustynv/ros/tags?name=foxy><b>ROS2 Foxy</b></a> (<code>dustynv/ros:foxy-ros-base-l4t-r35.3.1</code>)
 </summary>
 </br>
@@ -247,6 +235,28 @@ The following images can be pulled from NGC or DockerHub without needing to buil
 |                                                                                     |   R32.7.1   | `dustynv/ros:humble-pytorch-l4t-r32.7.1`          |
 
 </details>
+<details>
+<summary>
+<a href=https://hub.docker.com/repository/registry-1.docker.io/dustynv/ros/tags?name=iron><b>ROS2 Iron</b></a> (<code>dustynv/ros:iron-ros-base-l4t-r35.3.1</code>)
+</summary>
+</br>
+
+|                                                                                     | L4T Version | Container Tag                                      |
+|-------------------------------------------------------------------------------------|:-----------:|----------------------------------------------------|
+| [`ROS2 Iron`](https://hub.docker.com/repository/registry-1.docker.io/dustynv/ros/tags?name=iron-ros-base) <sup>(ros-base)</sup> |   R35.3.1   | `dustynv/ros:iron-ros-base-l4t-r35.3.1`          |
+|                                                                                     |   R35.2.1   | `dustynv/ros:iron-ros-base-l4t-r35.2.1`          |
+|                                                                                     |   R35.1.0   | `dustynv/ros:iron-ros-base-l4t-r35.1.0`          |
+|                                                                                     |   R32.7.1   | `dustynv/ros:iron-ros-base-l4t-r32.7.1`          |
+| [`ROS2 Iron`](https://hub.docker.com/repository/registry-1.docker.io/dustynv/ros/tags?name=iron-desktop) <sup>(desktop)</sup> |   R35.3.1   | `dustynv/ros:iron-desktop-l4t-r35.3.1`          |
+|                                                                                     |   R35.2.1   | `dustynv/ros:iron-desktop-l4t-r35.2.1`          |
+|                                                                                     |   R35.1.0   | `dustynv/ros:iron-desktop-l4t-r35.1.0`          |
+|                                                                                     |   R32.7.1   | `dustynv/ros:iron-desktop-l4t-r32.7.1`          |
+| [`ROS2 Iron`](https://hub.docker.com/repository/registry-1.docker.io/dustynv/ros/tags?name=iron-pytorch) <sup>(PyTorch)</sup> |   R35.3.1   | `dustynv/ros:iron-pytorch-l4t-r35.3.1`          |
+|                                                                                     |   R35.2.1   | `dustynv/ros:iron-pytorch-l4t-r35.2.1`          |
+|                                                                                     |   R35.1.0   | `dustynv/ros:iron-pytorch-l4t-r35.1.0`          |
+|                                                                                     |   R32.7.1   | `dustynv/ros:iron-pytorch-l4t-r32.7.1`          |
+
+</details>
 
 > **note:** L4T R32.x containers can run on other versions of R32.x (e.g. R32.7.1 containers can run on R32.7.2)<br/>
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; L4T R35 containers can run on other versions of R35 (e.g. R35.1.0 containers can run on R35.2.1)
@@ -260,7 +270,18 @@ $ scripts/docker_run.sh -c nvcr.io/nvidia/l4t-pytorch:r32.5.0-pth1.7-py3
 
 For other configurations, below are the instructions to build and test the containers using the included Dockerfiles.
 
-## Docker Default Runtime
+## Building the Containers
+
+To rebuild the containers from a Jetson device running [JetPack 4.4](https://developer.nvidia.com/embedded/jetpack) or newer, first clone this repo:
+
+``` bash
+$ git clone https://github.com/dusty-nv/jetson-containers
+$ cd jetson-containers
+```
+
+Before proceeding, make sure you have set your [Docker Default Runtime](#docker-default-runtime) to `nvidia` as shown below:
+
+### Docker Default Runtime
 
 To enable access to the CUDA compiler (nvcc) during `docker build` operations, add `"default-runtime": "nvidia"` to your `/etc/docker/daemon.json` configuration file before attempting to build the containers:
 
@@ -278,17 +299,6 @@ To enable access to the CUDA compiler (nvcc) during `docker build` operations, a
 ```
 
 You will then want to restart the Docker service or reboot your system before proceeding.
-
-## Building the Containers
-
-To rebuild the containers from a Jetson device running [JetPack 4.4](https://developer.nvidia.com/embedded/jetpack) or newer, first clone this repo:
-
-``` bash
-$ git clone https://github.com/dusty-nv/jetson-containers
-$ cd jetson-containers
-```
-
-Before proceeding, make sure you have set your [Docker Default Runtime](#docker-default-runtime) to `nvidia` as shown above.
 
 ### ML Containers
 
@@ -309,12 +319,12 @@ Note that the TensorFlow and PyTorch pip wheel installers for aarch64 are automa
 To build the ROS containers, use [`scripts/docker_build_ros.sh`](scripts/docker_build_ros.sh) with the `--distro` option to specify the name of the ROS distro to build and `--package` to specify the ROS package to build (the default package is `ros_base`):
 
 ``` bash
-$ ./scripts/docker_build_ros.sh --distro all   # build all ROS distros (default)
-$ ./scripts/docker_build_ros.sh --distro foxy  # build only foxy (ros_base)
-$ ./scripts/docker_build_ros.sh --distro foxy --package desktop  # build foxy desktop (on JetPack 5.x)
+$ ./scripts/docker_build_ros.sh --distro all     # build all ROS distros (default)
+$ ./scripts/docker_build_ros.sh --distro humble  # build only humble (ros_base)
+$ ./scripts/docker_build_ros.sh --distro humble --package desktop  # build humble desktop
 ```
 
-The package options are:  `ros_base`, `ros_core`, and `desktop` - note that the ROS2 Desktop packages only build on JetPack 5.x.  You can also specify `--with-pytorch` to build variants with support for PyTorch. 
+The package options are:  `ros_base`, `ros_core`, and `desktop` - you can also specify `--with-pytorch` to build variants with support for PyTorch, [jetson-inference](https://github.com/dusty-nv/jetson-inference) and [ros_deep_learning](https://github.com/dusty-nv/ros_deep_learning). 
 
 ## Run the Containers
 

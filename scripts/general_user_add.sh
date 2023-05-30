@@ -60,5 +60,5 @@ echo "${USERNAME} ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/99_aptget
 
 su ${USERNAME}
 cd
-echo 'source ${ROS_ROOT}/install/setup.bash' >> ~/.bashrc
+echo "source ${ROS_ROOT}/install/setup.bash" >> ${USER_DIR}/.bashrc
 
